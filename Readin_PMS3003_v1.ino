@@ -2,6 +2,9 @@
  *   PM1.0, PM2.5, PM10 (ug/m3)
  *   v1
  */
+#include <SoftwareSerial.h>
+
+SoftwareSerial pms(6, 7);   // RX, TX
 
 // counting num of bytes
 int count = 0;
@@ -11,11 +14,12 @@ unsigned char pm[3];
 
 void setup() {
   Serial.begin(9600);     // 9600 baudrate for the sensor
+  pms.begin(9600);
 }
 
 void loop() 
 {
-  if (Serial.available()) // check serial
+  if (pms.available()) // check serial
   {
     dust();               // call function dust() for reading data
   }
@@ -24,7 +28,7 @@ void loop()
 
 void dust()       // function for reading and printing data
 {
-  int inByte = Serial.read();   // store received byte to variable 'inByte'
+  int inByte = pms.read();   // store received byte to variable 'inByte'
    
   if (inByte == 0x42)           
   {
