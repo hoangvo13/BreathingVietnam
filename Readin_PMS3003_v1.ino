@@ -29,6 +29,9 @@ void dust()       // function for reading and printing data
   if (inByte == 0x42)           
   {
     count = 0;        // reset counting value if character of 1st byte is detected
+    pm[0] = (char)0;
+    pm[1] = (char)0;
+    pm[2] = (char)0;
   }
 
   else                // otherwise keep counting up
