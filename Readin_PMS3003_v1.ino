@@ -7,9 +7,7 @@
 int count = 0;
 
 // variables
-unsigned char pm01;
-unsigned char pm25; 
-unsigned char pm10;
+unsigned char pm[3];
 
 void setup() {
   Serial.begin(9600);     // 9600 baudrate for the sensor
@@ -38,25 +36,24 @@ void dust()       // function for reading and printing data
     count++;
     if (count == 11)  // Byte 12 - PM1.0
     {
-      pm01 = inByte;  
+      pm[0] = inByte;  
     }
     if (count == 13)  // Byte 14 - PM2.5
     {
-      pm25 = inByte;
+      pm[1] = inByte;
     }
     if (count == 15)  // Byte 16 - PM10
     {
-      pm10 = inByte;
+      pm[2] = inByte;
     }
     if (count == 16)  // After capturing PM1.0, PM2.5, PM10 values, print them out
     {
       Serial.print("PM1.0: ");
-      Serial.print(pm10, DEC);
+      Serial.print(pm[0], DEC);
       Serial.print(" PM2.5: ");
-      Serial.print(pm25, DEC);
+      Serial.print(pm[1], DEC);
       Serial.print(" PM10: ");
-      Serial.println(pm10, DEC);
+      Serial.println(pm[2], DEC);
     }
   }
 }
-
